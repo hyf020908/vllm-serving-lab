@@ -1,0 +1,11 @@
+{
+  "model_family": "Qwen dense",
+  "served_model_name": "qwen",
+  "model_path": "/path/to/Qwen-7B-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 8192,
+  "gpu_memory_utilization": 0.9,
+  "tensor_parallel_size": 1,
+  "trust_remote_code": true,
+  "notes": "Use a local Hugging Face model directory or a mounted model path."
+}

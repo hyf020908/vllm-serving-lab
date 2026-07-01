@@ -17,6 +17,10 @@ Easy, fast, and cheap LLM serving for everyone
 🔥 We have built a vLLM website to help you get started with vLLM. Please visit [vllm.ai](https://vllm.ai) to learn more.
 For events, please visit [vllm.ai/events](https://vllm.ai/events) to join us.
 
+> Fork note: this fork adds `examples/serving_lab`, a lightweight LLM Serving engineering lab for vLLM deployment, preflight checks, OpenAI-compatible API testing, streaming checks, metrics snapshots, benchmarking, parameter sweeps, and troubleshooting docs.
+>
+> See: [examples/serving_lab/README.md](examples/serving_lab/README.md)
+
 ---
 
 ## About

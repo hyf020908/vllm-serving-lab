@@ -1,0 +1,11 @@
+{
+  "model_family": "DeepSeek MoE",
+  "served_model_name": "deepseek",
+  "model_path": "/path/to/DeepSeek-MoE-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 8192,
+  "gpu_memory_utilization": 0.88,
+  "tensor_parallel_size": 4,
+  "trust_remote_code": true,
+  "notes": "Start with conservative context length and concurrency for large MoE models."
+}

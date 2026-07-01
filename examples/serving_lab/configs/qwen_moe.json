@@ -1,0 +1,11 @@
+{
+  "model_family": "Qwen MoE",
+  "served_model_name": "qwen-moe",
+  "model_path": "/path/to/Qwen-MoE-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 8192,
+  "gpu_memory_utilization": 0.88,
+  "tensor_parallel_size": 2,
+  "trust_remote_code": true,
+  "notes": "MoE models usually need more careful tensor parallel and memory tuning."
+}

@@ -1,0 +1,11 @@
+{
+  "model_family": "GLM",
+  "served_model_name": "glm",
+  "model_path": "/path/to/glm-model",
+  "dtype": "bfloat16",
+  "max_model_len": 8192,
+  "gpu_memory_utilization": 0.9,
+  "tensor_parallel_size": 1,
+  "trust_remote_code": true,
+  "notes": "GLM-family models may require trust_remote_code and matching chat templates."
+}
