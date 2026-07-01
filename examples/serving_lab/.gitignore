@@ -1,0 +1,7 @@
+runs/
+reports/
+*.log
+*.tmp
+*.pyc
+__pycache__/
+.pytest_cache/

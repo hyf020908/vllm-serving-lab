@@ -88,7 +88,21 @@
 
 **排查步骤：** 用 preflight 检查端口。
 
-**解决方向：** 停止旧进程或更换 `PORT`。
+**解决方向：** 停止旧进程或更换 `PORT`。也可以用
+`adaptive_launcher.py` 自动选择下一个可用端口。
+
+### readiness check 超时
+
+**现象：** 进程未立即退出，但 `/v1/models` 在超时时间内不可用。
+
+**常见原因：** 模型加载慢、参数过激、prefill/batch 配置导致初始化压力大。
+
+**排查步骤：** 查看 `launch_report.md` 和 `round_<n>.log`，确认是否仍在加载
+或已进入异常状态。
+
+**解决方向：** `adaptive_launcher.py` 会降低 `max_num_seqs` 和
+`max_num_batched_tokens` 后重试。仍失败时，应手动增加 timeout 或检查模型路径、
+依赖和硬件。
 
 ### 模型路径挂载错误
 
@@ -129,6 +143,7 @@
 **排查步骤：** 对比短 prompt 和长 prompt 的 TTFT。
 
 **解决方向：** 降低 prefill 压力，使用 prefix caching 或预热。
+`performance_advisor.py` 会给出建议，但不会自动重启可用服务。
 
 ### 流式输出卡顿
 
@@ -149,3 +164,26 @@
 **排查步骤：** 按输入长度和输出长度分组 benchmark。
 
 **解决方向：** 做请求分流，限制超长请求，调低并发上限。
+
+### waiting requests 多
+
+**现象：** `/metrics` 中 `vllm:num_requests_waiting` 持续大于 0。
+
+**常见原因：** 并发超过当前 batch 能力，或长请求占用 KV Cache 和 decode slots。
+
+**排查步骤：** 同时观察 running requests、KV Cache usage、TTFT、TPOT 和 P99。
+
+**解决方向：** 如果资源仍有余量，可逐步提高 `max_num_batched_tokens` 或
+`max_num_seqs`；如果 KV Cache 已高，应降低上下文、并发或输出长度。
+
+### 吞吐低但资源仍有余量
+
+**现象：** tokens/s 和 requests/s 偏低，但 KV Cache、waiting requests 和延迟都
+没有明显压力。
+
+**常见原因：** batch 参数过保守或 benchmark 并发不足。
+
+**排查步骤：** 使用 `parameter_sweep.py` 生成对照实验命令。
+
+**解决方向：** 逐步提高 `max_num_seqs` 和 `max_num_batched_tokens`，每次只改一组
+参数并记录 benchmark 结果。

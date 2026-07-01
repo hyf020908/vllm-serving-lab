@@ -16,6 +16,7 @@ operational debugging.
 - Streaming chat health checks.
 - `/metrics` snapshot parsing.
 - Lightweight benchmark and parameter sweep command generation.
+- Adaptive startup recovery and runtime performance advice.
 - Practical docs for parameters, KV Cache, API compatibility, and failures.
 
 ## Layout
@@ -109,6 +110,34 @@ Generate sweep commands:
   --output sweep.md
 ```
 
+## Adaptive Startup and Runtime Advice
+
+Generate an adaptive launch report without starting vLLM:
+
+```bash
+.venv/bin/python examples/serving_lab/scripts/adaptive_launcher.py \
+  --model-path /path/to/model \
+  --served-model-name qwen \
+  --dry-run
+```
+
+Start with adaptive startup recovery:
+
+```bash
+.venv/bin/python examples/serving_lab/scripts/adaptive_launcher.py \
+  --model-path /path/to/model \
+  --served-model-name qwen \
+  --port 8000 \
+  --max-retries 4
+```
+
+Send a chat request and print runtime advice without restarting the service:
+
+```bash
+BASE_URL=http://127.0.0.1:8000 MODEL=qwen \
+bash examples/serving_lab/scripts/curl_chat_with_advice.sh
+```
+
 ## Reproduce Results
 
 1. Record hardware, model path, vLLM commit, and launch command.
@@ -130,4 +159,5 @@ More docs:
 - [KV Cache memory](docs/kv_cache_memory.md)
 - [API compatibility](docs/api_compatibility.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Adaptive startup and runtime advice](docs/adaptive_startup_and_advice.md)
 - [Benchmark report template](docs/benchmark_report_template.md)

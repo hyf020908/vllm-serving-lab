@@ -22,6 +22,15 @@
 vllm serve ...
 ```
 
+## Adaptive Startup Report
+
+- Dry-run command:
+- Final command file:
+- Launch report:
+- Startup retries:
+- Final port:
+- Automatic adjustments:
+
 ## Workload
 
 - Concurrency:
@@ -58,3 +67,6 @@ vllm serve ...
 - `max_num_batched_tokens`:
 - `gpu_memory_utilization`:
 - `tensor_parallel_size`:
+- Runtime advisor status:
+- Runtime advisor reasons:
+- Runtime advisor next parameter direction:
